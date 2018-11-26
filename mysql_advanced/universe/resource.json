@@ -1,0 +1,12 @@
+{
+  "assets": {
+    "uris": {
+      "cmd": "http://minio.marathon.l4lb.thisdcos.directory:9000/artifacts/portworx-mysql/cmd.sh"
+    }
+  },
+  "images": {
+    "icon-small": "https://http://minio.marathon.l4lb.thisdcos.directory:9000/artifacts/portworx-mysql/mysql-icon-small.png",
+    "icon-medium": "http://minio.marathon.l4lb.thisdcos.directory:9000/artifacts/portworx-mysql/mysql-icon-medium.png",
+    "icon-large": "http://minio.marathon.l4lb.thisdcos.directory:9000/artifacts/portworx-mysql/mysql-icon-large.png"
+  }
+}

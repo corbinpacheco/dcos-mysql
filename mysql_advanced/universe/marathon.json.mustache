@@ -1,0 +1,74 @@
+{
+  "id": "{{service.name}}",
+  "env": {
+    "MYSQL_RANDOM_ROOT_PASSWORD": "yes"
+  },
+  "healthChecks": [
+    {
+      "gracePeriodSeconds": 300,
+      "intervalSeconds": 60,
+      "maxConsecutiveFailures": 3,
+      "port": 3306,
+      "timeoutSeconds": 20,
+      "delaySeconds": 15,
+      "protocol": "MESOS_TCP",
+      "ipProtocol": "IPv4"
+    }
+  ],
+  "user": "{{advanced.user}}",
+  "instances": 1,
+  "cpus": {{service.cpus}},
+  "mem": {{service.mem}},
+  "labels": {
+    "DCOS_SERVICE_NAME": "{{service.name}}",
+    "DCOS_SERVICE_PORT_INDEX": "0",
+    "DCOS_SERVICE_SCHEME": "http"
+  },
+  "container": {
+   "type": "DOCKER",
+    "docker": {
+      "image": "mysql:8.0.13",
+      "forcePullImage": true,
+      "privileged": false,
+      "parameters": [
+        {
+          "key": "volume-driver",
+          "value": "pxd"
+        },
+        {
+          "key": "volume",
+          "value": "size={{service.volume_size}}G,repl={{advanced.volume_replica_count}},io_priority={{advanced.volume_iopri}},fs=xfsname={{service.name}}_mysql_vol:/var/lib/mysql"
+        }
+      ]
+    },
+    {{#advanced.service_account_secret}}
+      "secrets": {
+        "serviceCredential": {
+           "source": "{{advanced.service_account_secret}}"
+        }
+      },
+  {{/advanced.service_account_secret}}
+  "env": {
+    "PACKAGE_NAME": "{{package-name}}",
+    "PACKAGE_VERSION": "{{package-version}}",
+    "PACKAGE_BUILD_TIME_EPOCH_MS": "%(time_epoche_ms)s",
+    "PACKAGE_BUILD_TIME_STR": "%(time_str)s"
+  },
+  "networks": [
+    {
+      "mode": "container/bridge"
+    }
+  ],
+    "portMappings": [
+      {
+        "containerPort": 3306,
+        "hostPort": 0,
+        "protocol": "tcp"
+      }
+    ],
+  "upgradeStrategy":{
+    "minimumHealthCapacity": 0,
+    "maximumOverCapacity": 0
+  }
+ }
+}

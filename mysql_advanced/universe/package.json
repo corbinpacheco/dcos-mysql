@@ -1,0 +1,15 @@
+{
+  "packagingVersion": "4.0",
+  "upgradesFrom": ["{{upgrades-from}}"],
+  "downgradesTo": ["{{downgrades-to}}"],
+  "minDcosReleaseVersion": "1.9",
+  "name": "portworx-mysql",
+  "version": "{{package-version}}",
+  "maintainer": "community@mesosphere.com",
+  "description": "MYSQL for Portworx Storage on DC/OS",
+  "selected": false,
+  "framework": false,
+  "tags": ["portworx-mysql"],
+  "postInstallNotes": "DC/OS MYSQL for Portworx is being installed!\n\n\tDocumentation: {{documentation-path}}\n\tIssues: {{issues-path}}",
+  "postUninstallNotes": "DC/OS MYSQL for Portworx is being uninstalled."
+}
